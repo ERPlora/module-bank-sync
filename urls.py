@@ -7,6 +7,11 @@ urlpatterns = [
     # Dashboard
     path('', views.dashboard, name='dashboard'),
 
+    # Navigation tab aliases
+    path('accounts/', views.bank_accounts_list, name='accounts'),
+    path('transactions/', views.dashboard, name='transactions'),
+
+
     # BankAccount
     path('bank_accounts/', views.bank_accounts_list, name='bank_accounts_list'),
     path('bank_accounts/add/', views.bank_account_add, name='bank_account_add'),
