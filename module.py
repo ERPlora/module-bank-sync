@@ -31,3 +31,19 @@ PERMISSIONS = [
 'bank_sync.reconcile_transaction',
 'bank_sync.manage_settings',
 ]
+
+ROLE_PERMISSIONS = {
+    "admin": ["*"],
+    "manager": [
+        "add_bankaccount",
+        "change_bankaccount",
+        "reconcile_transaction",
+        "view_bankaccount",
+        "view_banktransaction",
+    ],
+    "employee": [
+        "add_bankaccount",
+        "view_bankaccount",
+        "view_banktransaction",
+    ],
+}
