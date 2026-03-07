@@ -1,0 +1,73 @@
+{% load djicons i18n %}
+<div data-back-url="{% url 'bank_sync:bank_accounts_list' %}" hidden></div>
+
+<div class="p-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold">{% trans "Edit Bankaccount" %}</h1>
+        <div class="flex gap-2">
+            <a class="btn btn-ghost btn-sm"
+               hx-get="{% url 'bank_sync:bank_accounts_list' %}"
+               hx-target="#main-content-area"
+               hx-push-url="true">
+                {% trans "Cancel" %}
+            </a>
+            <button type="submit" form="edit-bank_account-form" class="btn btn-sm color-primary">
+                {% icon "checkmark-outline" %}
+                {% trans "Save" %}
+            </button>
+        </div>
+    </div>
+
+        {% if error %}
+        <div class="callout callout-error">
+            <div class="callout-content"><span class="callout-text">{{ error }}</span></div>
+        </div>
+        {% endif %}
+    <!-- Form -->
+    <form id="edit-bank_account-form"
+          hx-post="{% url 'bank_sync:bank_account_edit' obj.id %}" class="max-w-2xl">
+        {% csrf_token %}
+        <div class="card mb-4">
+            <div class="card-body flex flex-col gap-4">
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Name" %}</label>
+                <input type="text" name="name" class="input input-sm w-full" value="{{ obj.name }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Bank Name" %}</label>
+                <input type="text" name="bank_name" class="input input-sm w-full" value="{{ obj.bank_name }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Account Number" %}</label>
+                <input type="text" name="account_number" class="input input-sm w-full" value="{{ obj.account_number }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Iban" %}</label>
+                <input type="text" name="iban" class="input input-sm w-full" value="{{ obj.iban }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Currency" %}</label>
+                <input type="text" name="currency" class="input input-sm w-full" value="{{ obj.currency }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Balance" %}</label>
+                <input type="number" name="balance" class="input input-sm w-full" step="0.01" value="{{ obj.balance }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Is Active" %}</label>
+                <label class="toggle color-success">
+                <input type="checkbox" name="is_active" {% if obj.is_active %}checked{% endif %}>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

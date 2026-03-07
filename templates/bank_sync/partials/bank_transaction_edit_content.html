@@ -1,0 +1,68 @@
+{% load djicons i18n %}
+<div data-back-url="{% url 'bank_sync:bank_transactions_list' %}" hidden></div>
+
+<div class="p-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold">{% trans "Edit Banktransaction" %}</h1>
+        <div class="flex gap-2">
+            <a class="btn btn-ghost btn-sm"
+               hx-get="{% url 'bank_sync:bank_transactions_list' %}"
+               hx-target="#main-content-area"
+               hx-push-url="true">
+                {% trans "Cancel" %}
+            </a>
+            <button type="submit" form="edit-bank_transaction-form" class="btn btn-sm color-primary">
+                {% icon "checkmark-outline" %}
+                {% trans "Save" %}
+            </button>
+        </div>
+    </div>
+
+        {% if error %}
+        <div class="callout callout-error">
+            <div class="callout-content"><span class="callout-text">{{ error }}</span></div>
+        </div>
+        {% endif %}
+    <!-- Form -->
+    <form id="edit-bank_transaction-form"
+          hx-post="{% url 'bank_sync:bank_transaction_edit' obj.id %}" class="max-w-2xl">
+        {% csrf_token %}
+        <div class="card mb-4">
+            <div class="card-body flex flex-col gap-4">
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Date" %}</label>
+                <input type="date" name="date" class="input input-sm w-full" value="{{ obj.date }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Description" %}</label>
+                <input type="text" name="description" class="input input-sm w-full" value="{{ obj.description }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Amount" %}</label>
+                <input type="number" name="amount" class="input input-sm w-full" step="0.01" value="{{ obj.amount }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Balance After" %}</label>
+                <input type="number" name="balance_after" class="input input-sm w-full" step="0.01" value="{{ obj.balance_after }}">
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Is Reconciled" %}</label>
+                <label class="toggle color-success">
+                <input type="checkbox" name="is_reconciled" {% if obj.is_reconciled %}checked{% endif %}>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+                </div>
+
+                <div>
+                <label class="text-sm font-medium mb-1 block">{% trans "Reference" %}</label>
+                <input type="text" name="reference" class="input input-sm w-full" value="{{ obj.reference }}">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
