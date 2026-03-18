@@ -2,8 +2,8 @@ from django.utils.translation import gettext_lazy as _
 
 MODULE_ID = 'bank_sync'
 MODULE_NAME = _('Bank Reconciliation')
-MODULE_VERSION = '1.0.0'
-MODULE_ICON = 'card-outline'
+MODULE_VERSION = '1.0.1'
+MODULE_ICON = 'material:account_balance'
 MODULE_DESCRIPTION = _('Bank account sync and transaction reconciliation')
 MODULE_AUTHOR = 'ERPlora'
 MODULE_CATEGORY = 'finance'
