@@ -7,6 +7,7 @@ MODULE_ICON = 'material:account_balance'
 MODULE_DESCRIPTION = _('Bank account sync and transaction reconciliation')
 MODULE_AUTHOR = 'ERPlora'
 MODULE_CATEGORY = 'finance'
+HAS_MODELS = True
 
 MENU = {
     'label': _('Bank Reconciliation'),
